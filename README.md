@@ -17,4 +17,6 @@ Features
  * OkHttp3
  * Gson
  * Glide
+ * ViewBinding
+ * Parcelize
 
