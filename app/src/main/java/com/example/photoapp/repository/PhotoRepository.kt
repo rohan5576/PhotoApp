@@ -6,6 +6,7 @@ import com.example.photoapp.db.PhotoDAO
 import com.example.photoapp.db.PhotoDB
 import com.example.photoapp.model.PhotoItem
 import com.example.photoapp.retrofit.PhotoAPIInterface
+import retrofit2.Response
 import javax.inject.Inject
 
 class PhotoRepository @Inject constructor(private  val photoAPIInterface: PhotoAPIInterface,
@@ -16,12 +17,14 @@ class PhotoRepository @Inject constructor(private  val photoAPIInterface: PhotoA
     val photos : LiveData<List<PhotoItem>>
         get() = _photosList
 
-    suspend fun getPhotos(){
+    suspend fun getPhotos() : Response<List<PhotoItem>> {
         val result = photoAPIInterface.getPhotoApi()
         if(result.body()!=null&&result.isSuccessful){
-             photoDB.getPhotoData().addPhotos(result.body()!!)
+             photoDB?.getPhotoData()?.addPhotos(result.body()!!)
             _photosList.postValue(result.body())
         }
+
+        return result
     }
 
 
