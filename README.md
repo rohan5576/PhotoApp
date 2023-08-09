@@ -19,4 +19,6 @@ Features
  * Glide
  * ViewBinding
  * Parcelize
+ * Unit test for repository class
+ * Test for Room database
 
